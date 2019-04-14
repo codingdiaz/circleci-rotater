@@ -8,3 +8,6 @@ The code that does the rotation is writen in golang and the easy way to deploy i
 ## Why
 
 CircleCI is a really cool CI\CD tool but, it hasn't solved this use case. AWS Keys should be rotated and this project makes that happen with little overhead. 
+
+## Getting Started
+
