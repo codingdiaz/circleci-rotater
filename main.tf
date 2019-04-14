@@ -1,7 +1,7 @@
 // main lambda function
 resource "aws_lambda_function" "lambda_function" {
   filename         = "${file("${path.module}/function.zip")}"
-  function_name    = "${var.project_name}-circleci-rotator"
+  function_name    = "${var.circle_project}-circleci-rotator"
   role             = "${aws_iam_role.lambda_iam.arn}"
   handler          = "main"
   source_code_hash = "${filebase64sha256("${file("${path.module}/function.zip")}")}"
