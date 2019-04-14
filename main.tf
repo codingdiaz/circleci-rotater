@@ -4,7 +4,7 @@ resource "aws_lambda_function" "lambda_function" {
   function_name    = "${var.circle_project}-circleci-rotator"
   role             = "${aws_iam_role.lambda_iam.arn}"
   handler          = "main"
-  source_code_hash = "${base64sha256("${file("${path.module}/function.zip")}")}"
+  source_code_hash = "${base64sha256("${path.module}/function.zip")}"
   runtime          = "go1.x"
 
   environment {
