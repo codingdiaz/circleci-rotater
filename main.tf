@@ -62,7 +62,7 @@ data "aws_iam_policy_document" "iam" {
     ]
 
     resources = [
-      "${aws_iam_user.aws_user.arn}"
+      "${data.aws_iam_user.aws_user.arn}"
     ]
   }
 
@@ -77,5 +77,5 @@ resource "aws_iam_policy" "iam" {
 
 resource "aws_iam_role_policy_attachment" "iam" {
   role       = "${aws_iam_role.lambda_iam.name}"
-  policy_arn = "${data.aws_iam_policy.iam.arn}"
+  policy_arn = "${aws_iam_policy.iam.arn}"
 }
