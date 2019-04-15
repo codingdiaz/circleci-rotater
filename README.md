@@ -9,5 +9,27 @@ The code that does the rotation is writen in golang and the easy way to deploy i
 
 CircleCI is a really cool CI\CD tool but, it hasn't solved this use case. AWS Keys should be rotated and this project makes that happen with little overhead. 
 
+## What Gets Deployed?
+* lambda function -- this contains the go code that does the key rotation
+* lambda iam role -- this contains the lambda basic execution policy plus iam access to the specified aws_user
+* cloudwatch event -- to trigger the lambda and do rotation with a cron expression
+
 ## Getting Started
 
+```hcl
+provider "aws" {
+  region     = "us-east-1"
+}
+
+module "rotator" {
+  source = "git@github.com:codingdiaz/circleci-rotater.git"
+
+  circle_token = "<insert-token>"
+  circle_org = "<github-user or org>"
+  circle_project = "<some-project>"
+  aws_user = "<aws iam user name>"
+}
+
+```
+
+Pro Tip: Get a token for a specific project to reduce the scope of the token

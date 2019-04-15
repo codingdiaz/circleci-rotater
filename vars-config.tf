@@ -13,3 +13,8 @@ variable "circle_org" {
 variable "aws_user" {
   type = "string"
 }
+
+variable "cloudwatch_expression" {
+  type = "string"
+  default = "rate(1 hour)"
+}

@@ -79,3 +79,22 @@ resource "aws_iam_role_policy_attachment" "iam" {
   role       = "${aws_iam_role.lambda_iam.name}"
   policy_arn = "${aws_iam_policy.iam.arn}"
 }
+
+// cloud watch resources
+resource "aws_cloudwatch_event_rule" "lambda_rule" {
+    name = "${var.circle_project}-circleci-rotator-rule"
+    schedule_expression = "${var.cloudwatch_expression}"
+}
+
+resource "aws_cloudwatch_event_target" "event_target" {
+    rule = "${aws_cloudwatch_event_rule.lambda_rule.name}"
+    arn = "${aws_lambda_function.lambda_function.arn}"
+}
+
+resource "aws_lambda_permission" "cloudwatch_lambda_permission" {
+    statement_id = "AllowExecutionFromCloudWatch"
+    action = "lambda:InvokeFunction"
+    function_name = "${aws_lambda_function.lambda_function.function_name}"
+    principal = "events.amazonaws.com"
+    source_arn = "${aws_cloudwatch_event_rule.lambda_rule.arn}"
+}
