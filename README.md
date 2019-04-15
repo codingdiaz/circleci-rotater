@@ -27,7 +27,12 @@ module "rotator" {
   circle_token = "<insert-token>"
   circle_org = "<github-user or org>"
   circle_project = "<some-project>"
-  aws_user = "<aws iam user name>"
+  aws_user = "${aws_iam_user.circle_deploy.name}"
+}
+
+resource "aws_iam_user" "circle_deploy" {
+  name = "circle_deploy"
+  path = "/"
 }
 
 ```
