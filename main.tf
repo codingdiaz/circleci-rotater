@@ -45,3 +45,37 @@ resource "aws_iam_role" "lambda_iam" {
 }
 EOF
 }
+
+data "aws_iam_user" "aws_user" {
+  user_name = "${var.aws_user}"
+}
+
+data "aws_iam_policy_document" "iam" {
+  statement {
+    sid = "circleIAM"
+
+    actions = [
+      "iam:GetUser",
+      "iam:CreateAccessKey",
+      "iam:ListAccessKeys",
+      "iam:DeleteAccessKey",
+    ]
+
+    resources = [
+      "${aws_iam_user.aws_user.arn}"
+    ]
+  }
+
+}
+
+resource "aws_iam_policy" "iam" {
+  name        = "iamPermissions"
+  path        = "/"
+
+  policy = "${aws_iam_policy.iam.json}"
+}
+
+resource "aws_iam_role_policy_attachment" "iam" {
+  role       = "${aws_iam_role.lambda_iam.name}"
+  policy_arn = "${data.aws_iam_policy.iam.arn}"
+}
