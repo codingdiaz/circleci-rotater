@@ -6,6 +6,7 @@ import (
 	"log"
 
 	"github.com/jszwedko/go-circleci"
+	"github.com/aws/aws-lambda-go/lambda"
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/iam"
@@ -19,6 +20,10 @@ type config struct {
 }
 
 func main() {
+	lambda.Start(HandleRequest)
+}
+
+func HandleRequest() (error) {
 	
 	c := config {
 		circleToken: os.Getenv("CIRCLE_TOKEN"),
@@ -105,5 +110,5 @@ func main() {
 		}
 	}
 	fmt.Println("Keys rotated...")
+	return nil
 }
-

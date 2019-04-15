@@ -2,6 +2,19 @@
 
 
 [[projects]]
+  digest = "1:fc53fe55ee530de09a7593d102a4aae9df3fa085abeb9fbd41becc6d56e335f2"
+  name = "github.com/aws/aws-lambda-go"
+  packages = [
+    "lambda",
+    "lambda/handlertrace",
+    "lambda/messages",
+    "lambdacontext",
+  ]
+  pruneopts = "UT"
+  revision = "08d251dc58f204411d79012fd6f1beefb7107fea"
+  version = "v1.10.0"
+
+[[projects]]
   digest = "1:bd14a96f176022e2f3505376dadf9a4ef1c5521dbc924e3cd8058497a34ecf43"
   name = "github.com/aws/aws-sdk-go"
   packages = [
@@ -59,8 +72,8 @@
   analyzer-name = "dep"
   analyzer-version = 1
   input-imports = [
+    "github.com/aws/aws-lambda-go/lambda",
     "github.com/aws/aws-sdk-go/aws",
-    "github.com/aws/aws-sdk-go/aws/awserr",
     "github.com/aws/aws-sdk-go/aws/session",
     "github.com/aws/aws-sdk-go/service/iam",
     "github.com/jszwedko/go-circleci",
