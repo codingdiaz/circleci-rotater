@@ -22,7 +22,7 @@ provider "aws" {
 }
 
 module "rotator" {
-  source = "git@github.com:codingdiaz/circleci-rotater.git"
+  source = "git@github.com:codingdiaz/circleci-rotater.git?ref=v0.0.1"
 
   circle_token = "<insert-token>"
   circle_org = "<github-user or org>"
