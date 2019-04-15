@@ -72,7 +72,7 @@ resource "aws_iam_policy" "iam" {
   name        = "iamPermissions"
   path        = "/"
 
-  policy = "${aws_iam_policy.iam.json}"
+  policy = "${data.aws_iam_policy_document.iam.json}"
 }
 
 resource "aws_iam_role_policy_attachment" "iam" {
